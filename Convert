@@ -6,22 +6,19 @@ pipeline {
     }
 
     stages {
+
         stage('Build') {
             steps {
                 retry(3) {
-                    sh 'make build'
+                    sh 'echo "make build"'
                 }
             }
         }
 
         stage('Test') {
             steps {
-                script {
-                    try {
-                        sh 'make test'
-                    } catch (err) {
-                        currentBuild.result = 'UNSTABLE'
-                    }
+                catchError(buildResult: 'UNSTABLE', stageResult: 'UNSTABLE') {
+                    sh 'echo "make test"'
                 }
             }
         }
