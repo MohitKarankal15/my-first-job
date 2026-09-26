@@ -28,13 +28,13 @@ pipeline {
             input message: 'Deploy to Production?'
           }
       }
-  post {
-      success {
+      post {
+        success {
           echo 'Pipeline succeeded'
-      }
-      failure {
+        }
+        failure {
           echo 'Pipeline failed'
+        }
       }
-    }
   }
 }
