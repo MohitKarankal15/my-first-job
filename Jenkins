@@ -28,6 +28,7 @@ pipeline {
             input message: 'Deploy to Production?'
           }
       }
+  }
       post {
         success {
           echo 'Pipeline succeeded'
@@ -36,5 +37,4 @@ pipeline {
           echo 'Pipeline failed'
         }
       }
-  }
 }
