@@ -1,9 +1,14 @@
 pipeline {
   agent any
-  parameters {
-      choice(name: 'ENVIRONMENT', choices: ['staging', 'production'], description: 'Target')
-  }
+  environment {
+    APP_ENV = 'test'
   stages {
+      stage('Checkout') {
+          steps { 
+              checkout scm
+          }
+      }
+
       stage('Build') {
           steps { sh "echo Building"}
       }
@@ -26,5 +31,13 @@ pipeline {
               input message: 'Deploy to  production?'
           }
       }
+  post {
+    success {
+        echo 'All stages passed'
+    }
+    failure {
+        echo 'Something failed'
+    }
+  }
   }
 }
